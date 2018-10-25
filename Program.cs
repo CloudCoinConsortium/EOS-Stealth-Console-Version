@@ -17,6 +17,7 @@ using McMaster.Extensions.CommandLineUtils;
 using ConsoleTables;
 using System.Text;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Founders
 {
@@ -847,6 +848,7 @@ namespace Founders
 
             Console.Out.WriteLine("What tag will you add to the file name?");
             String tag = reader.readString();
+            tag = Regex.Replace(tag, "[\\/?:*\"><|]+", "", RegexOptions.Compiled);
             logger.Info("User Input : Tag : " + tag);
 
             int totalSaved = exp_1 + (exp_5 * 5) + (exp_25 * 25) + (exp_100 * 100) + (exp_250 * 250);

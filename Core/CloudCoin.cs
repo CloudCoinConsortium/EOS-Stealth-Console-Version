@@ -471,7 +471,7 @@ namespace CloudCoinCore
         {
             if (charCount(pown, 'p') > 19)//Did 20 or more pass?
             {
-                if (charCount(pown, 'p') > 0)//Any Fails?
+                if (charCount(pown, 'f') > 0)//Any Fails?
                 {
                     folder = RAIDA.ActiveRAIDA.FS.FrackedFolder;
                     return;

@@ -1172,6 +1172,7 @@ CultureInfo.InvariantCulture);
             }
             Console.Out.WriteLine("What tag will you add to the file name?");
             String tag = reader.readString();
+            tag = Regex.Replace(tag, "[\\/?:*\"><|]+", "", RegexOptions.Compiled);
             //Console.Out.WriteLine(("Exporting to:" + exportFolder));
             if (file_type == 1)
             {

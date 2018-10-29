@@ -171,7 +171,6 @@ namespace CloudCoinCore
                 .GetFiles(folder)
                 .Where(file => Config.allowedExtensions.Any(file.ToLower().EndsWith))
                 .ToList();
-
             string[] fnames = new string[files.Count()];
             for (int i = 0; i < files.Count(); i++)
             {
@@ -190,6 +189,21 @@ namespace CloudCoinCore
                 {
                     try
                     {
+                        var coin = ReadBARCode(files[i]);
+                        if (coin == null)
+                        {
+                            coin = importJPEG(files[i]);
+                        }
+                        coin.ExistingFileName = files[i];
+                        folderCoins.Add(coin);
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Error(e.Message);
+                    }
+                    /*
+                    try
+                    {
                         var coin = importJPEG(files[i]);
                         coin.ExistingFileName = files[i];
                         folderCoins.Add(coin);
@@ -198,6 +212,7 @@ namespace CloudCoinCore
                     {
                         logger.Error(e.Message);
                     }
+                    */
                 }
                 if( ext == ".csv")
                 {
@@ -215,7 +230,6 @@ namespace CloudCoinCore
                     folderCoins.AddRange(CsvCoins);
                 }
             };
-
             return folderCoins;
         }
 
